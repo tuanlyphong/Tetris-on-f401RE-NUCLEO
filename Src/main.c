@@ -568,19 +568,14 @@ void CheckFullColumn(){
 	}
 }
 
-void displayBlock(int block[4][4]){
-	if(!Collision(currentX, currentY + size, block)) {
-		EraseBlock(currentX, currentY, block);
-		currentY += size;
-	}
-}
+
 // falling 1 block in 1 time
 void FallingBlock(int block[4][4]){
 	DrawBlock(currentX, currentY, block);
 	CheckFullRow();
 	if(!Collision(currentX, currentY + size, block)) {
-//		EraseBlock(currentX, currentY, block);
-//		currentY += size;
+		EraseBlock(currentX, currentY, block);
+		currentY += size;
 	}
 	else {
 		FixBlock(currentX, currentY, block);
@@ -609,9 +604,7 @@ void Falling(int block[4][4]) {
 		TimerStop(idTimer);
 	}
 
-
-	TimerStart("Fall", 100, TIMER_REPEAT_FOREVER, (void*) displayBlock, block);
-	idTimer = TimerStart("Fall", 1000, TIMER_REPEAT_FOREVER, (void*) FallingBlock, block);
+	idTimer = TimerStart("Fall", 500, TIMER_REPEAT_FOREVER, (void*) FallingBlock, block);
 }
 
 //Measure the distance of the blocks to the left and right borders so that the blocks do not go beyond the screen
